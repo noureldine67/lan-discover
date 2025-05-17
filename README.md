@@ -14,38 +14,61 @@
 
 ## Description
 
-LanDiscover est un outil Python pour découvrir les appareils sur un réseau local et scanner des IP spécifiques avec Nmap. Il permet aussi d’exporter les résultats en JSON.
+LanDiscover est un outil Python permettant de :
+
+* Découvrir les appareils connectés sur un réseau local via une plage CIDR.
+* Scanner une IP spécifique avec Nmap.
+* Exporter les résultats au format JSON.
+
+## Structure du projet
+
+```
+lan-discover/
+├── cli.py
+├── network/
+│   ├── discover.py
+│   ├── scanner.py
+│   ├── __init__.py
+│   └── __pycache__/
+│       ├── discover.cpython-313.pyc
+│       ├── scanner.cpython-313.pyc
+│       └── __init__.cpython-313.pyc
+├── README.md
+└── requirements.txt
+```
 
 ## Utilisation
 
-Lance le script avec les options suivantes :
+Il est recommandé d’exécuter le script avec les privilèges `sudo` pour accéder aux fonctionnalités réseau.
+
+**Important :** Pense à utiliser le chemin absolu vers l’interpréteur Python dans ton environnement virtuel `.venv`. Par exemple :
 
 ```bash
-python lan_discover.py [-n <réseau CIDR>] [-s <IP à scanner>] [-o <fichier JSON>]
+sudo /chemin/absolu/vers/.venv/bin/python cli.py [options]
 ```
 
-### Options :
+### Options disponibles
 
-* `-n`, `--network` : Découvrir les appareils d’un réseau (ex: `192.168.1.0/24`)
-* `-s`, `--scan` : Scanner une IP précise avec Nmap
-* `-o`, `--output` : Exporter les résultats dans un fichier JSON
+* `-n`, `--network` : plage réseau au format CIDR pour la découverte (ex: `192.168.1.0/24`)
+* `-s`, `--scan` : scanner une IP spécifique avec Nmap
+* `-o`, `--output` : exporter les résultats dans un fichier JSON
 
 ## Exemples
 
-* Découverte réseau :
+* Découvrir les appareils sur un réseau local :
 
   ```bash
-  python lan_discover.py -n 192.168.1.0/24
+  sudo /chemin/absolu/vers/.venv/bin/python cli.py -n 192.168.1.0/24
   ```
 
-* Scan d’une IP :
+* Scanner une IP précise :
 
   ```bash
-  python lan_discover.py -s 192.168.1.10
+  sudo /chemin/absolu/vers/.venv/bin/python cli.py -s 192.168.1.10
   ```
 
-* Découverte avec export :
+* Découvrir un réseau et exporter les résultats :
 
   ```bash
-  python lan_discover.py -n 192.168.1.0/24 -o resultat.json
+  sudo /chemin/absolu/vers/.venv/bin/python cli.py -n 192.168.1.0/24 -o resultat.json
   ```
